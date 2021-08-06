@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "error_msg": "Traceback (most recent call last):\nValueError: Node id is not unique",
+  "data": {
+    "total_served_vehicles": -1,
+    "delay_index": -1
+  }
+}

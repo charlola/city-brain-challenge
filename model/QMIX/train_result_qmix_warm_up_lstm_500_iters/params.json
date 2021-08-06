@@ -1,0 +1,41 @@
+{
+  "batch_mode": "complete_episodes",
+  "buffer_size": 2000,
+  "env": "grouped_multiagent",
+  "env_config": {
+    "gym_dict": {
+      "custom_observation": true,
+      "observation_dimension": 45,
+      "observation_features": [
+        "lane_vehicle_num",
+        "classic"
+      ]
+    },
+    "metric_period": 3600,
+    "simulator_cfg_file": "/starter-kit/cfg/simulator_warm_up.cfg",
+    "thread_num": 8,
+    "vehicle_info_path": "/starter-kit/log/"
+  },
+  "exploration_config": {
+    "epsilon_timesteps": 10000,
+    "final_epsilon": 0.02,
+    "initial_epsilon": 1.0,
+    "type": "EpsilonGreedy"
+  },
+  "framework": "torch",
+  "learning_starts": 2000,
+  "lr": 0.005,
+  "mixer": "qmix",
+  "mixing_embed_dim": 32,
+  "model": {
+    "lstm_cell_size": 64,
+    "max_seq_len": 999999
+  },
+  "num_cpus_per_worker": 8,
+  "num_workers": 1,
+  "optim_alpha": 0.99,
+  "optim_eps": 1e-05,
+  "target_network_update_freq": 20,
+  "timesteps_per_iteration": 1000,
+  "train_batch_size": 32
+}
