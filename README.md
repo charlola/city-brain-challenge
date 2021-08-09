@@ -15,24 +15,6 @@ docker run -it -v <path to code repository>:/starter-kit --shm-size=20gb citybra
 ```
 When the docker container is running and the shell is accessible, proceed to model specific instructions below. 
 
-### For training on Slurm
-Submitting an ```sbatch``` job is the ideal way to run training on Slurm.
-We have already included the required _sbatch_ files required to run training on Slurm.   
-For example, for running QMix training on warm_up dataset on Slurm, execute: 
-```
-$ ssh -Y datalab2.srv.lrz.de -l di52rac
-Enter password when prompted
-$ cd city-brain-challenge
-See available sbatch files
-$ ls
-Execute chosen sbatch file (in this case qmix-rllib-warm-up.sbatch) 
-$ sbatch qmix-rllib-warm-up.sbatch
-Check status of the job
-$ scontrol show job <job_id>
-Check logs
-$ cat logs/train/QMIX/train_logs.err
-```
-Track progress on the MLFlow dashboard. 
 
 #### Presslight
 To run Presslight training locally, in the bash shell inside docker container, execute:
@@ -43,6 +25,7 @@ $ ./presslight_train.sh
 Set the required params according to your choice.  
 **Note:** Change the values for **sim_cfg** and **roadnet** path based on which challenge stage (_warm_up_, _round2_, _round3_) you wish to train for. MLFlow logging can be activated in the presslight_train.py file. The checkpoints will be saved in model/presslight/ directory. 
 
+Paper: http://personal.psu.edu/hzw77/publications/presslight-kdd19.pdf
 
 #### QMix
 To run QMix training locally, in the bash shell inside docker container, execute:
@@ -54,7 +37,7 @@ Set the required params according to your choice.
 **Note:** Change the values for **sim_cfg** and **roadnet** path based on which challenge stage (_warm_up_, _round2_, _round3_) you wish to train for.   
 **Important:** Change the "observation_dimension" in agent/qmix/gym_cfg.py depending upon the challenge stage chosen, before training. Set it to 45 for _warm_up_ and 50 for _round2_.
 
-The checkpoints will be saved in ```model/QMIX/``` directory. Track progress on the MLFlow dashboard. 
+Paper: https://arxiv.org/abs/1803.11485
 
 #### Colight
 To run Colight training locally, in the bash shell inside docker container, execute:
@@ -65,6 +48,8 @@ $ bash colight_train.sh
 Set the required params according to your choice.   
 **Note:** Change the values for **sim_cfg**, **roadnet** path based on which challenge stage (_warm_up_, _round2_, _round3_) and **agents** to the you wish to train for.   
 **Important:** Change the "adj_neighbors" in agent/colight/gym_cfg.py depending upon the challenge stage chosen, before training. It has to match the number of agents. _warm_up_: 22, _round2_: 859, _round3_: 1004
+
+Paper: http://personal.psu.edu/hzw77/publications/colight-cikm19.pdf
 
 ## How to evaluate training
 
@@ -96,6 +81,7 @@ $ bash colight_evaluate.sh
 ## Generate Max Pressure Experience
 
 To generate max pressure experience as batches, please execute the ```MP_exp_gen.py```. The resulting JSON-file will be in directory "demo-out".
+
 ## Team 
 Niklas Strauß (supervisor)    
 Charlotte Vaessen   
